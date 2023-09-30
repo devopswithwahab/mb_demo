@@ -1,22 +1,22 @@
 node('master') 
 {
-   stage('Continuous Download_Master') 
+   stage('Continuous Download') 
 	{
     		git branch: 'main', url: 'https://github.com/devopswithwahab/maven.git'
 	}
-   stage('Continuous Build_Master') 
+   stage('Continuous Build') 
 	{
     		sh 'mvn package'
 	}
-	stage('Continuous Deployment_Master') 
+	stage('Continuous Deployment') 
 	{
             sh label: '', script: 'scp  /home/ubuntu/.jenkins/workspace/ScriptedPipeline/webapp/target/webapp.war  ubuntu@172.31.23.113:/var/lib/tomcat9/webapps/qaenv.war'
 	}
-stage('Continuous Testing_Master') 
+stage('Continuous Testing') 
 	{
 	        sh label: '', script: 'echo "Testing Passed"'
 	}
-stage('Continuous Delivery_Master') 
+stage('Continuous Delivery') 
 	{
 	        sh label: '', script: 'scp  /home/ubuntu/.jenkins/workspace/ScriptedPipeline/webapp/target/webapp.war  ubuntu@172.31.29.225:/var/lib/tomcat9/webapps/prodenv.war'
 	}
